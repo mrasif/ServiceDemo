@@ -80,6 +80,8 @@ public class RemoteBoundServiceActivity extends AppCompatActivity implements Vie
 
         myRemoteServiceIntent=new Intent();
         myRemoteServiceIntent.setComponent(new ComponentName("com.example.asif.servicedemo","com.example.asif.servicedemo.services.MyRemoteService"));
+        // This is for security checking
+        myRemoteServiceIntent.putExtra("KEY","THISISMYKEY");
     }
 
     @Override

@@ -8,6 +8,8 @@ import android.os.Message;
 import android.os.Messenger;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.util.Random;
 
 /**
@@ -48,7 +50,16 @@ public class MyRemoteService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.d(TAG, "onBind: executed...");
-        return randomNumberMessenger.getBinder();
+        // This is for security checking
+        if(intent.getStringExtra("KEY").equals("THISISMYKEY")){
+            Toast.makeText(getApplicationContext(),"Correct key !",Toast.LENGTH_SHORT).show();
+            return randomNumberMessenger.getBinder();
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"Wrong key !",Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
     }
 
     @Override
